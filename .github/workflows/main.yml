@@ -1,11 +1,10 @@
-name: Build Minecraft Webcam
+name: Build Project
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -18,17 +17,17 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        distribution: 'temurin'
         java-version: '17'
+        distribution: 'temurin'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build --stacktrace
 
-    - name: Upload JARs
+    - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: built-jars
-        path: |
-          plugin/build/libs/*.jar
-          mod/build/libs/*.jar
-
+        name: build-output
+        path: build/libs/*.jar
