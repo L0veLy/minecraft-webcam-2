@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+}
+
+group = 'com.example.webcam'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.21.4"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:0.15.3"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
